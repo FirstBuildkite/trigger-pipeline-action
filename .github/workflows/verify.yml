@@ -9,7 +9,7 @@ on:
 
 jobs:
   tests:
-    name: Integration tests1123
+    name: Integration tests11234
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -20,7 +20,7 @@ jobs:
       - name: Run action with minimal parameters
         uses: "buildkite/trigger-pipeline-action@v2.0.0"
         with:
-          buildkite_api_access_token:  "bkua_f1ffa3a085faed2012888b2f7c1939af567f5845"
+          buildkite_api_access_token:  "bkua_f1ffa3a085faed2012888b2f7c1939af567f5849"
           pipeline: "justTest-111/trigger-gitaction"
           message: Triggered from GHA using minimal parameters
           branch: master
