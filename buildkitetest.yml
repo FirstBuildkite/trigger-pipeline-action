@@ -2,7 +2,7 @@ name: "build kite test"
 on: [push]
 
 steps:
-  - name: Trigger a Buildkite Build
+  - name: Trigger a Buildkite Build1
     uses: "buildkite/trigger-pipeline-action@v2.0.0"
     with:
       buildkite_api_access_token: ${{ secrets.TRIGGER_BK_BUILD_TOKEN }}
