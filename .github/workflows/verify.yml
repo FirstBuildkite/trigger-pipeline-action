@@ -1,10 +1,15 @@
 name: Verify
 
-on: push
+on:
+  push:
+    branches: [ 'develop', 'main', 'master' ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ 'develop', 'main', 'master' ]
 
 jobs:
   tests:
-    name: Integration tests
+    name: Integration tests1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -15,7 +20,7 @@ jobs:
       - name: Run action with minimal parameters
         uses: ./
         with:
-          buildkite_api_access_token:  ${{ secrets.BUILD_KITE_GIT_ACTION }}
+          buildkite_api_access_token:  "bkua_885b7a4c722aba19ffa298c4ec54d42b25fa287b"
           pipeline: "justTest-111/trigger-gitaction"
           message: Triggered from GHA using minimal parameters
           branch: master
@@ -25,7 +30,7 @@ jobs:
         uses: ./
         id: tests
         with:
-          buildkite_api_access_token:  ${{ secrets.BUILD_KITE_GIT_ACTION }}
+          buildkite_api_access_token:  "bkua_885b7a4c722aba19ffa298c4ec54d42b25fa287b"
           pipeline: "justTest-111/trigger-gitaction"
           branch: master
           commit: HEAD
