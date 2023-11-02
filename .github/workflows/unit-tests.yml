@@ -7,22 +7,22 @@ jobs:
       name: build
       runs-on: ubuntu-latest
       steps:
-  
+
         - name: Check out code
-          uses: actions/checkout@v3 
+          uses: actions/checkout@v3
 
         - name: Verify that the Docker image for the action builds
-          run: docker build . --file Dockerfile         
-     
+          run: docker build . --file Dockerfile
+
     tests:
       name: unit-test
-      runs-on: ubuntu-latest    
+      runs-on: ubuntu-latest
       steps:
-        - name: checkout base image 
-          uses: actions/checkout@v3  
+        - name: checkout base image
+          uses: actions/checkout@v3
         - uses: addnab/docker-run-action@v3
           with:
             image: buildkite/plugin-tester:v4.0.0
-            options: --rm -v ${{ github.workspace }}:/plugin 
-            run: bats tests/. 
-   
+            options: --rm -v ${{ github.workspace }}:/plugin
+            run: bats tests/.
+
