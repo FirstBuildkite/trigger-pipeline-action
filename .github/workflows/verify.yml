@@ -15,7 +15,7 @@ jobs:
       - name: Run action with minimal parameters
         uses: ./
         with:
-          buildkite_api_access_token:  ${{ secrets.BUILDKITE_API_ACCESS_TOKEN }}
+          buildkite_api_access_token:  ${{ secrets.BUILD_KITE_GIT_ACTION }}
           pipeline: "justTest-111/trigger-gitaction"
           message: Triggered from GHA using minimal parameters
           branch: master
@@ -25,7 +25,7 @@ jobs:
         uses: ./
         id: tests
         with:
-          buildkite_api_access_token:  ${{ secrets.BUILDKITE_API_ACCESS_TOKEN }}
+          buildkite_api_access_token:  ${{ secrets.BUILD_KITE_GIT_ACTION }}
           pipeline: "justTest-111/trigger-gitaction"
           branch: master
           commit: HEAD
