@@ -1,6 +1,11 @@
 name: Verify
 
-on: push
+on:
+  push:
+    branches: [ 'develop', 'main', 'master' ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ 'develop', 'main', 'master' ]
 
 jobs:
   tests:
