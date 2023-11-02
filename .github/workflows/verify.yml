@@ -9,7 +9,7 @@ on:
 
 jobs:
   tests:
-    name: Integration tests1123
+    name: Integration tests11234
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
