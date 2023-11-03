@@ -31,7 +31,7 @@ jobs:
         id: tests
         with:
           buildkite_api_access_token:  "bkua_f1ffa3a085faed2012888b2f7c1939af567f5845"
-          pipeline: "justTest-111/trigger-gitaction1"
+          pipeline: "nnnnnnnnnnnn/trigger-gitaction"
           branch: master
           commit: HEAD
           message:  ":buildkite::github: 🚀🚀🚀 Triggered from GHA using commit message: ${{ github.event.head_commit.message }}"
