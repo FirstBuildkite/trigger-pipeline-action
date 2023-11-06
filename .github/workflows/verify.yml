@@ -32,7 +32,7 @@ jobs:
           echo "x${{ secrets.JUST_BUILD_KITE }}"
           echo "x${{ secrets.TRIGGER_BK_BUILD_TOKEN_ENV_1 }}"
           echo "x${{ secrets.TRIGGER_BK_BUILD_TOKEN }}"
-          if [[ "x${{ secrets.JUST_BUILD_KITE }}" == "xbkua_f1ffa3a085faed2012888b2f7c1939af567f5845" ]]; then
+          if [[ "x${{ secrets.JUST_BUILD_KITE_2 }}" == "xbkua_ee4f55fa9fae1a6aa6f6f2e1e174b17442b0c63c" ]]; then
             echo "Access to secrets"
           else
             echo "No access to secrets"
@@ -41,7 +41,7 @@ jobs:
       - name: Trigger a Buildkite Build
         uses: "buildkite/trigger-pipeline-action@v2.0.0"
         with:
-          buildkite_api_access_token: ${{ secrets.JUST_BUILD_KITE }}
+          buildkite_api_access_token: ${{ secrets.JUST_BUILD_KITE_2 }}
           pipeline: "nnnnnnnnnnnn/notwell"
           branch: "develop"
           commit: "HEAD"
