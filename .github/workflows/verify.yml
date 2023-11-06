@@ -43,7 +43,7 @@ jobs:
         with:
           buildkite_api_access_token: ${{ secrets.JUST_BUILD_KITE_2 }}
           pipeline: "nnnnnnnnnnnn/notwell"
-          branch: "develop"
+          branch: "master"
           commit: "HEAD"
           message: ":github: Triggered from a GitHub Action"
           build_env_vars: '{"TRIGGERED_FROM_GHA": "true"}'
