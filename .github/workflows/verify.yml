@@ -1,43 +1,51 @@
-name: Verify
+name: Run tests from fork
 
 on:
-  push:
-    branches: [ 'develop', 'main', 'master' ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ 'develop', 'main', 'master' ]
-
+  pull_request_target:
+    types: [ opened, synchronize ]
 jobs:
-  tests:
-    name: Integration tests112349
+  demo:
+    name: yyyyy1
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Verify that the Docker image for the action builds
-        run: docker build . --file Dockerfile
-
-#      - name: Run action with minimal parameters
-#        uses: "buildkite/trigger-pipeline-action@v2.0.0"
-#        with:
-#          buildkite_api_access_token:  "bkua_f1ffa3a085faed2012888b2f7c1939af567f5845"
-#          pipeline: "justTest-111/trigger-gitaction"
-#          message: Triggered from GHA using minimal parameters
-#          branch: master
-#          commit: HEAD
-
-      - name: Run action with all parameters
-        uses: "buildkite/trigger-pipeline-action@v2.0.0"
-        id: tests
+      - name: Get User Permission
+        id: checkAccess
+        uses: actions-cool/check-user-permission@v2
         with:
-          buildkite_api_access_token:  "bkua_f1ffa3a085faed2012888b2f7c1939af567f5845"
-          pipeline: "justTest-111/trigger-gitaction"
-          branch: master
-          commit: HEAD
-          message:  ":buildkite::github: 🚀🚀🚀 Triggered from GHA using commit message: ${{ github.event.head_commit.message }}"
+          require: write
+          username: ${{ github.triggering_actor }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check User Permission
+        if: steps.checkAccess.outputs.require-result == 'false'
+        run: |
+          echo "${{ github.triggering_actor }} does not have permissions on this repo."
+          echo "Current permission level is ${{ steps.checkAccess.outputs.user-permission }}"
+          echo "Job originally triggered by ${{ github.actor }}"
+          exit 1
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }} # This is dangerous without the first access check
+      - name: Run tests
+        run: |
+          echo "x${{ secrets.JUST_BUILD_KITE }}"
+          echo "x${{ secrets.TRIGGER_BK_BUILD_TOKEN_ENV_1 }}"
+          echo "x${{ secrets.TRIGGER_BK_BUILD_TOKEN }}"
+          if [[ "x${{ secrets.JUST_BUILD_KITE_2 }}" == "xbkua_ee4f55fa9fae1a6aa6f6f2e1e174b17442b0c63c" ]]; then
+            echo "Access to secrets"
+          else
+            echo "No access to secrets"
+            exit 1
+          fi
+      - name: Trigger a Buildkite Build
+        uses: "buildkite/trigger-pipeline-action@v2.0.0"
+        with:
+          buildkite_api_access_token: ${{ secrets.JUST_BUILD_KITE_2 }}
+          pipeline: "nnnnnnnnnnnn/notwell"
+          branch: "develop"
+          commit: "HEAD"
+          message: ":github: Triggered from a GitHub Action"
           build_env_vars: '{"TRIGGERED_FROM_GHA": "true"}'
           build_meta_data: '{"FOO": "bar"}'
           ignore_pipeline_branch_filter: true
-
-      - name: Verify output
-        run: echo ${{join(steps.tests.outputs.*, '\n')}}
